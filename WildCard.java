@@ -3,7 +3,7 @@ class WildCard extends Card {
     this("wild");
   }
 
-  public WildCard(String type) {
-    super(type);
+  public WildCard(String color) {
+    super(color);
   }
 }

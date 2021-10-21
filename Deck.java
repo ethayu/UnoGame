@@ -7,8 +7,37 @@ class Deck {
     deck = new ArrayList<>();
   }
 
-  public void addCards(int x) {
-    addCards
+  /**
+   * adds x cards from deck2 to deck1
+   * @param x
+   * @param deck1
+   * @param deck2
+   */
+  static public void addCards(int x, Deck deck1, Deck deck2) {
+    for (int i = 0; i < x; i++) {
+      int index = (int) (Math.random() * deck2.deck.size());
+      deck1.deck.add(deck2.deck.get(index));
+      deck2.deck.remove(index);
+    }
+  }
+
+  /**
+   * move card x in deck1 to deck2
+   * @param x
+   * @param deck1
+   * @param deck2
+   */
+  static public void moveCard(int x, Deck deck1, Deck deck2) {
+    deck2.deck.add(deck1.deck.get(x));
+    deck1.deck.remove(x);
+  }
+
+  static public void showUser(Deck deck) {
+    int i = 0;
+    for (Card card : deck.deck) {
+      if (card.getClass().getName().equals("NormalCard"))
+        System.out.println("| Card " + i++ + ": " + card.number + " " + card.color);
+    }
   }
 
   public void makeDeck() {
