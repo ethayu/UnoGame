@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Main {
+
+  static Scanner sc = new Scanner(System.in); // create scanner
   public static void main(String[] args) {
-    
-    Scanner sc = new Scanner(System.in); // create scanner
     Deck table = new Deck(); // deck players put cards into
     Deck deck = new Deck(); // deck players draw from
 
@@ -12,6 +12,9 @@ class Main {
     System.out.println("How many players?"); // get user input for players
     players = sc.nextInt();
     Deck[] playerDecks = new Deck[players]; // create deck for each player
+    for (int i = 0; i < playerDecks.length; i++) {
+      playerDecks[i] = new Deck();
+    }
     
 
     // deal 7 cards to each player at random
@@ -29,5 +32,18 @@ class Main {
        }
     }
     
+  }
+  static int makeMove(Deck[] playerDecks, Deck table, int i) {
+
+    System.out.println("Which card would you like to draw?");
+    Deck.showUser(playerDecks[i]);
+    System.out.println("Enter the integer tag for the card you want to play:");
+    int cardIndex = sc.nextInt();
+
+    if (cardIndex > playerDecks.length || cardIndex < playerDecks.length) return -1;
+    if (!Card.isCompatible(table.deck.get(table.deck.size() - 1), playerDecks[i].deck.get(cardIndex))) return -1;
+
+    Deck.moveCard(sc.nextInt()-1, playerDecks[i], table);
+    return cardIndex;
   }
 }

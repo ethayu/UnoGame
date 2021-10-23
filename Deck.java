@@ -36,7 +36,17 @@ class Deck {
     int i = 0;
     for (Card card : deck.deck) {
       if (card.getClass().getName().equals("NormalCard"))
-        System.out.println("| Card " + i++ + ": " + card.number + " " + card.color);
+        System.out.println("| Card " + i++ + ": " + card.number + " " + card.type);
+      else if (card.getClass().getName().equals("PlusTwo"))
+        System.out.println("| Card " + i++ + ": " + card.type + " Plus Two Card");
+      else if (card.getClass().getName().equals("Reverse"))
+        System.out.println("| Card " + i++ + ": " + card.type + " Reverse Card");
+      else if (card.getClass().getName().equals("Skip"))
+        System.out.println("| Card " + i++ + ": " + card.type + " Skip Card");
+      else if (card.getClass().getName().equals("WildCard"))
+        System.out.println("| Card " + i++ + ": Wild Card");
+      else if (card.getClass().getName().equals("WildCardPlusFour"))
+        System.out.println("| Card " + i++ + ": Wild Card Plus Four Card");
     }
   }
 
