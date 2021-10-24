@@ -39,22 +39,11 @@ class Deck {
     }
   }
 
-  public void makeFullDeck() {
-    for(int i = 1; i < 10; i++) {
-      deck.add(new NormalCard("Red", i));
-      deck.add(new NormalCard("Red", i));
-      deck.add(new NormalCard("Yellow", i));
-      deck.add(new NormalCard("Yellow", i));
-      deck.add(new NormalCard("Green", i));
-      deck.add(new NormalCard("Green", i));
-      deck.add(new NormalCard("Blue", i));
-      deck.add(new NormalCard("Blue", i));
-    }
+  public Card getTop() {
+    return deck.get(deck.size() - 1);
+  }
 
-    deck.add(new NormalCard("Red", 0));
-    deck.add(new NormalCard("Yellow", 0));
-    deck.add(new NormalCard("Green", 0));
-    deck.add(new NormalCard("Blue", 0));
+  public void makeFullDeck() {
 
     for(int i = 0; i < 2; i++) {
       deck.add(new PlusTwo("Red"));
@@ -75,5 +64,21 @@ class Deck {
       deck.add(new WildCard());
       deck.add(new WildCardPlusFour());
     }
+    for(int i = 1; i < 10; i++) {
+      deck.add(new NormalCard("Red", i));
+      deck.add(new NormalCard("Red", i));
+      deck.add(new NormalCard("Yellow", i));
+      deck.add(new NormalCard("Yellow", i));
+      deck.add(new NormalCard("Green", i));
+      deck.add(new NormalCard("Green", i));
+      deck.add(new NormalCard("Blue", i));
+      deck.add(new NormalCard("Blue", i));
+    }
+
+    deck.add(new NormalCard("Red", 0));
+    deck.add(new NormalCard("Yellow", 0));
+    deck.add(new NormalCard("Green", 0));
+    deck.add(new NormalCard("Blue", 0));
+
   }
 }

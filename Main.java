@@ -22,52 +22,68 @@ class Main {
     for (int i = 0; i < players; i++) Deck.addCards(7, playerDecks[i], draw);
     Deck.addCards(1, table, draw);
 
-    System.out.println("-----UNO!-----");
+    int d = 1;
 
-    while (true) {
+    // loop through every player, display cards
+    // allow user to choose which card to play
+    // if card is incompatible with last card in table deck, make them play again
+    // allow user option to draw card
+    while (true) for (int i = 0; i < players; i += d) {
 
-      // loop through every player, display cards
-      // allow user to choose which card to play
-      // if card is incompatible with last card in table deck, make them play again
-      // allow user option to draw card
-      for (int i = 0; i < players; i++) {
-
-        // player UI
-        System.out.println("Table card: |" + table.deck.get(table.deck.size() - 1) + "|");
-        System.out.println("Player " + (i + 1) + " - which card will you play?");
-        Deck.showUser(playerDecks[i]);
-        System.out.println("Would you like to play or draw a card?");
-        System.out.println("Type '1' for play and '0' for draw");
-        if (playerDecks[i].deck.size() == 1) {
-          //uno print statement
-          if (!Card.isCompatible(playerDecks[i].deck.get(0), table.deck.get(table.deck.size() - 1)))
-            Deck.addCards(1, playerDecks[i], draw);
-
-          else {
-            System.out.println("Player " + i + 1 + " wins!");
-            break;
-          }
-        } else if (sc.nextInt() == 0) {
-          // take top card from draw deck and add card to player deck
+      // player UI
+      System.out.println("Table card: |" + table.getTop() + "|");
+      System.out.println("Player " + (i + 1) + " - which card will you play?");
+      Deck.showUser(playerDecks[i]);
+      System.out.println("Would you like to play or draw a card?");
+      System.out.println("Type '1' for play and '0' for draw");
+      if (playerDecks[i].deck.size() == 1) {
+        System.out.println("-----UNO!-----");
+        if (!Card.isCompatible(playerDecks[i].deck.get(0), table.getTop()))
           Deck.addCards(1, playerDecks[i], draw);
-        } else {
-          if (makeMove(playerDecks, table, i) == -1) makeMove(playerDecks, table, i);
+
+        else {
+          System.out.println("Player " + i + 1 + " wins!");
+          break;
         }
-       }
+      } else if (sc.nextInt() == 0) {
+        // take top card from draw deck and add card to player deck
+        Deck.addCards(1, playerDecks[i], draw);
+      } else {
+        if (makeMove(playerDecks, table, i)) makeMove(playerDecks, table, i);
+        if (table.getTop().getClass().getName().equals("PlusTwo")) Deck.addCards(2, playerDecks[i + d], draw);
+        else if (table.getTop().getClass().getName().equals("Reverse")) d *= -1;
+        else if (table.getTop().getClass().getName().equals("Skip")) i += d;
+        else if (table.getTop().getClass().getName().equals("WildCard")) if (makeWildCardMove(playerDecks, table, i)) makeWildCardMove(playerDecks, table, i);
+        else if (table.getTop().getClass().getName().equals("WildCardPlusFour")){
+          if (makeWildCardMove(playerDecks, table, i)) makeWildCardMove(playerDecks, table, i);
+          Deck.addCards(4, playerDecks[i + d], draw);
+        }
+
+      }
     }
-    
   }
-  static int makeMove(Deck[] playerDecks, Deck table, int i) {
+  static boolean makeMove(Deck[] playerDecks, Deck table, int i) {
+
+    System.out.println("Which card would you like to put on the table?");
+    System.out.println("Enter the integer tag for the card you want to play:");
+    int cardIndex = sc.nextInt();
+
+    if (cardIndex > playerDecks.length || cardIndex < playerDecks.length) return true;
+    if (!Card.isCompatible(table.getTop(), playerDecks[i].deck.get(cardIndex)))
+      return true;
+
+    Deck.moveCard(cardIndex-1, playerDecks[i], table);
+    return false;
+  }
+
+  static boolean makeWildCardMove(Deck[] playerDecks, Deck table, int i) {
 
     System.out.println("Which card would you like to draw?");
     System.out.println("Enter the integer tag for the card you want to play:");
     int cardIndex = sc.nextInt();
 
-    if (cardIndex > playerDecks.length || cardIndex < playerDecks.length) return -1;
-    if (!Card.isCompatible(table.deck.get(table.deck.size() - 1), playerDecks[i].deck.get(cardIndex)))
-      return -1;
-
+    if (cardIndex > playerDecks.length || cardIndex < playerDecks.length) return true;
     Deck.moveCard(cardIndex-1, playerDecks[i], table);
-    return cardIndex;
+    return false;
   }
 }
