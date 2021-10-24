@@ -1,0 +1,28 @@
+goal: to run out of cards
+
+Put down card if its same number or same color
+
+1. Deal and display the 7 cards
+
+
+Class card (only has color)
+
+Sub Class normal card (color, number)
+
+wildcard
+	sub class - +4
+
+
+Reverse card
+
++2 card
+
+Skip
+
+arraylist of card objects
+
+global var that stores number/color of latest card
+
+randomizing cards getting dealt
+
+https://www.delftstack.com/howto/java/java-clear-console/
