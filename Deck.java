@@ -33,7 +33,7 @@ class Deck {
   }
 
   static public void showUser(Deck deck) {
-    int i = 0;
+    int i = 1;
     for (Card card : deck.deck) {
       System.out.println("| Card " + i++ + ": " + card);
     }

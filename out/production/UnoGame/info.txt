@@ -1,3 +1,10 @@
+TODO: case where user doesn't enter a number between 2 and 7 for number of players,
+    case where user doesn't enter 0 or 1 in deciding to play or draw a card
+    clear text after each turn,
+    javadoc/comments,
+    make sure that there are no bugs
+
+
 goal: to run out of cards
 
 Put down card if its same number or same color
