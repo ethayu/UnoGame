@@ -35,51 +35,40 @@ class Deck {
   static public void showUser(Deck deck) {
     int i = 0;
     for (Card card : deck.deck) {
-      if (card.getClass().getName().equals("NormalCard"))
-        System.out.println("| Card " + i++ + ": " + card.number + " " + card.type);
-      else if (card.getClass().getName().equals("PlusTwo"))
-        System.out.println("| Card " + i++ + ": " + card.type + " Plus Two Card");
-      else if (card.getClass().getName().equals("Reverse"))
-        System.out.println("| Card " + i++ + ": " + card.type + " Reverse Card");
-      else if (card.getClass().getName().equals("Skip"))
-        System.out.println("| Card " + i++ + ": " + card.type + " Skip Card");
-      else if (card.getClass().getName().equals("WildCard"))
-        System.out.println("| Card " + i++ + ": Wild Card");
-      else if (card.getClass().getName().equals("WildCardPlusFour"))
-        System.out.println("| Card " + i++ + ": Wild Card Plus Four Card");
+      System.out.println("| Card " + i++ + ": " + card);
     }
   }
 
-  public void makeDeck() {
+  public void makeFullDeck() {
     for(int i = 1; i < 10; i++) {
-      deck.add(new NormalCard("red", i));
-      deck.add(new NormalCard("red", i));
-      deck.add(new NormalCard("yellow", i));
-      deck.add(new NormalCard("yellow", i));
-      deck.add(new NormalCard("green", i));
-      deck.add(new NormalCard("green", i));
-      deck.add(new NormalCard("blue", i));
-      deck.add(new NormalCard("blue", i));
+      deck.add(new NormalCard("Red", i));
+      deck.add(new NormalCard("Red", i));
+      deck.add(new NormalCard("Yellow", i));
+      deck.add(new NormalCard("Yellow", i));
+      deck.add(new NormalCard("Green", i));
+      deck.add(new NormalCard("Green", i));
+      deck.add(new NormalCard("Blue", i));
+      deck.add(new NormalCard("Blue", i));
     }
 
-    deck.add(new NormalCard("red", 0));
-    deck.add(new NormalCard("yellow", 0));
-    deck.add(new NormalCard("green", 0));
-    deck.add(new NormalCard("blue", 0));
+    deck.add(new NormalCard("Red", 0));
+    deck.add(new NormalCard("Yellow", 0));
+    deck.add(new NormalCard("Green", 0));
+    deck.add(new NormalCard("Blue", 0));
 
     for(int i = 0; i < 2; i++) {
-      deck.add(new PlusTwo("red"));
-      deck.add(new PlusTwo("yellow"));
-      deck.add(new PlusTwo("green"));
-      deck.add(new PlusTwo("blue"));
-      deck.add(new Reverse("red"));
-      deck.add(new Reverse("yellow"));
-      deck.add(new Reverse("green"));
-      deck.add(new Reverse("blue"));
-      deck.add(new Skip("red"));
-      deck.add(new Skip("yellow"));
-      deck.add(new Skip("green"));
-      deck.add(new Skip("blue"));
+      deck.add(new PlusTwo("Red"));
+      deck.add(new PlusTwo("Yellow"));
+      deck.add(new PlusTwo("Green"));
+      deck.add(new PlusTwo("Blue"));
+      deck.add(new Reverse("Red"));
+      deck.add(new Reverse("Yellow"));
+      deck.add(new Reverse("Green"));
+      deck.add(new Reverse("Blue"));
+      deck.add(new Skip("Red"));
+      deck.add(new Skip("Yellow"));
+      deck.add(new Skip("Green"));
+      deck.add(new Skip("Blue"));
     }
 
     for(int i = 0; i < 4; i++) {

@@ -17,7 +17,24 @@ class Card {
    * @return
    */
   static public boolean isCompatible(Card a, Card b) {
-    if (!a.type.equals(b.type)) return a.number == b.number;
+    if (!a.type.equals(b.type)) {
+      System.out.println( a.number == b.number);
+      return a.number == b.number;
+    }
     else return true;
   }
+
+  @Override
+  public String toString() {
+    return switch (this.getClass().getName()) {
+      case "NormalCard" -> this.number + " " + this.type;
+      case "PlusTwo" -> this.type + " Plus Two Card";
+      case "Reverse" -> this.type + " Reverse Card";
+      case "Skip" -> this.type + " Skip Card";
+      case "WildCard" -> "Wild Card";
+      case "WildCardPlusFour" -> "Wild Card Plus Four Card";
+      default -> "";
+    };
+  }
+
 }
