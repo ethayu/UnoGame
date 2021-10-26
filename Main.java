@@ -52,6 +52,7 @@ class Main {
         
         System.out.println("Would you like to play or draw a card?");
         System.out.println("Type '1' for play and '0' for draw");
+        int input = sc.nextInt();
         if (playerDecks[i].deck.size() == 1) {
           System.out.println("-----UNO!-----");
           if (!Card.isCompatible(playerDecks[i].deck.get(0), table.getTop()))
@@ -61,19 +62,19 @@ class Main {
             System.out.println("Player " + i + 1 + " wins!");
             break;
           }
-        } else if (sc.nextInt() != 0 && sc.nextInt() != 1) {
+        } else if (input != 0 && input != 1) {
             System.out.println("You must either draw or play a card. Try again.");
 
-        } else if (sc.nextInt() == 0) {
+        } else if (input == 0) {
           // take top card from draw deck and add card to player deck
           Deck.addCards(1, playerDecks[i], draw);
           correct = true;
         } else {
-          Deck.moveCard(makeMove(playerDecks, table, i) - 1, playerDecks[i], table);
+          Deck.moveCard(makeMove(playerDecks, table, i), playerDecks[i], table);
           if (table.getTop().getClass().getName().equals("PlusTwo")) Deck.addCards(2, playerDecks[i + d], draw);
           else if (table.getTop().getClass().getName().equals("Reverse")) d *= -1;
           else if (table.getTop().getClass().getName().equals("Skip")) i += d;
-          else if (table.getTop().getClass().getName().equals("WildCard")) Deck.moveCard(makeWildCardMove(playerDecks, i) - 1, playerDecks[i], table);
+          else if (table.getTop().getClass().getName().equals("WildCard")) Deck.moveCard(makeWildCardMove(playerDecks, i), playerDecks[i], table);
           else if (table.getTop().getClass().getName().equals("WildCardPlusFour")){
             Deck.moveCard(makeWildCardMove(playerDecks, i) - 1, playerDecks[i], table);
             Deck.addCards(4, playerDecks[i + d], draw);
@@ -85,11 +86,11 @@ class Main {
   }
   static int makeMove(Deck[] playerDecks, Deck table, int i) {
 
-    System.out.println("Which card would you like to draw?");
-    System.out.println("Enter the integer tag for the card you want to play:");
-    int cardIndex = sc.nextInt();
+    System.out.println("Which card would you like to play?");
+    System.out.println("Enter the integer tag for the card you want to play: ");
+    int cardIndex = sc.nextInt() - 1;
 
-    if (cardIndex > playerDecks.length || cardIndex < playerDecks[i].deck.size()) return makeMove(playerDecks, table, i);
+    if (!(cardIndex > 0 && cardIndex < playerDecks[i].deck.size())) return makeMove(playerDecks, table, i);
     if (!Card.isCompatible(table.getTop(), playerDecks[i].deck.get(cardIndex))) return makeMove(playerDecks, table, i);
     return cardIndex;
   }
@@ -97,10 +98,10 @@ class Main {
   static int makeWildCardMove(Deck[] playerDecks, int i) {
 
     System.out.println("Which card would you like to put on the table?");
-    System.out.println("Enter the integer tag for the card you want to play:");
-    int cardIndex = sc.nextInt();
+    System.out.println("Enter the integer tag for the card you want to play: ");
+    int cardIndex = sc.nextInt() - 1;
 
-    if (cardIndex > playerDecks.length || cardIndex < playerDecks[i].deck.size()) return makeWildCardMove(playerDecks, i);
+    if (!(cardIndex > 0 && cardIndex < playerDecks[i].deck.size())) return makeWildCardMove(playerDecks, i);
     return cardIndex;
   }
   
