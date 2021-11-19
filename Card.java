@@ -11,14 +11,14 @@ class Card {
   }
 
   /**
-   * Checks if card a is compa
-   * @param a
-   * @param b
-   * @return
+   * Checks if card a is compatible with card b
+   * @param a card a
+   * @param b card b
+   * @return true if is compatible; false if not.
    */
   static public boolean isCompatible(Card a, Card b) {
+    if (a.type.equals("wild") || a.type.equals("wildfour") || b.type.equals("wild") || b.type.equals("wildfour")) return true;
     if (!a.type.equals(b.type)) {
-      System.out.println( a.number == b.number);
       return a.number == b.number;
     }
     else return true;
